@@ -1,6 +1,6 @@
 import random
 
-def card_value():
+def card_value(card_rank):
     for key, value in values.items():
         print(value)
 
@@ -20,4 +20,4 @@ card_color = random.choice(color)
 print(card_rank)
 print(card_color)
 
-card_value()
+card_value(card_rank)
