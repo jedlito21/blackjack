@@ -3,7 +3,7 @@ import random
 #vytvořený balík karet
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
 colors = ["Hearts", "Diamonds", "Spades", "Clubs"]
-pack = [{"Rank": rank, "Color": color} for rank in ranks for color in colors]
+pack = [{"Rank": rank, "Suit": color} for rank in ranks for color in colors]
 random.shuffle(pack)
 
 card_count = 0
@@ -29,6 +29,7 @@ def deal_card(pack):
     player_cards.append(card)
 
 
+
 #ukládání karet
 
 player_cards = []
@@ -46,18 +47,20 @@ if card_count == 0:
     card_count = card_count + 1
     card = pack.pop()
     dealer_cards.append(card)
+    count = count + value_of_card(card['Rank'])
 if card_count == 1:
     deal_card(pack)
     card_count = card_count + 1
     card = pack.pop()
     dealer_cards.append(card)
-    print(player_cards)
-    print(dealer_cards)
-
-
+    print("__________________________________", "\n", "Your cards: ", player_cards[0]['Rank'], player_cards[0]['Suit'], "|", player_cards[1]['Rank'], player_cards[1]['Suit'])
+    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "| Unknown")
+    count = count + value_of_card(card['Rank'])
+    print("Your sum: ", count, "\n", "________________________________")
 #druhý tah
+input("Do you want to take a card?  1 - yes / 2 - no")
 
 
+# print(card_count)
 
 
-print(card_count)
