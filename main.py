@@ -58,8 +58,12 @@ if card_count == 1:
     count = count + value_of_card(card['Rank'])
     print("Your sum: ", count, "\n", "________________________________")
 #druhý tah
-input("Do you want to take a card?  1 - yes / 2 - no")
-
+if input("Do you want to take a card?  1 - yes / 2 - no") == "1":
+    pass
+elif input("Do you want to take a card?  1 - yes / 2 - no") == "2":
+    pass
+else:
+    print("You need to pick 1 or 2")
 
 # print(card_count)
 
