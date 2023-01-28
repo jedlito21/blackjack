@@ -67,6 +67,12 @@ while menuloop == True:
     elif menu_text == "4":
         aboutloop = True
         menuloop = False
+    elif menu_text == "5":
+        quit()
+    else:
+        print("You chose wrong number!")
+        menuloop = False
+
 
 # žebříček
 
@@ -75,10 +81,11 @@ while menuloop == True:
 while rulesloop == True:
     rulesloop = False
     print("•At start you get 2 cards\n•Your goal is to get sum of 21 or less\n•If you have more than 21 you loose\n•If you have 21 or less and the dealer has less than you, you win\n•If dealer has more than you but it's 21 or less, you loose\n\n")
-    menuloop = True
-# hra
-while gameloop == True:
 
+# hra
+nickname = ""
+while gameloop == True:
+    nickname = input("Nickname: ")
     # první tah
     if card_count == 0:
         deal_card_dealer(pack)
@@ -311,7 +318,7 @@ while gameloop == True:
                 break
     # druhý tah
 
-    take_card = input("Do you want to take a card?  1 - yes / 2 - no")
+    take_card = input("Do you want to take a card?  1 - yes / 2 - no / 3 - double down")
 
     if take_card == "1":
         if card_count == 2:
@@ -1014,6 +1021,246 @@ while gameloop == True:
                     print("YOU WON!")
                     break
             break
+    elif take_card == "3":
+        deal_card_player(pack)
+        card_count = card_count + 1
+        print("__________________________________", "\n", "Your cards: ", player_cards[0]['Rank'], player_cards[0]['Suit'], "|", player_cards[1]['Rank'], player_cards[1]['Suit'], "|", player_cards[2]['Rank'], player_cards[2]['Suit'])
+        count = count + value_of_card(player_cards[2]['Rank'])
+        print("Your sum: ", count, "\n", "________________________________")
+        if count > 21:
+            print("YOU LOST!")
+        elif count <= 21:
+            if count_dealer <= 16:
+                deal_card_dealer(pack)
+                card_count_dealer = card_count_dealer + 1
+                count_dealer = count_dealer + value_of_card(dealer_cards[2]['Rank'])
+                if count_dealer <= 16:
+                    deal_card_dealer(pack)
+                    card_count_dealer = card_count_dealer + 1
+                    count_dealer = count_dealer + value_of_card(dealer_cards[3]['Rank'])
+                    if count_dealer <= 16:
+                        deal_card_dealer(pack)
+                        card_count_dealer = card_count_dealer + 1
+                        count_dealer = count_dealer + value_of_card(dealer_cards[4]['Rank'])
+                        if count_dealer > 21:
+                            print("_______________________________")
+                            print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                  dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                  dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                  dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
+                                  dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'],
+                                  dealer_cards[4]['Suit'])
+                            print("Dealer's sum: ", count_dealer)
+                            print("_______________________________")
+                            print("YOU WON!")
+                            break
+                        elif count_dealer == 21:
+                            if count == 21:
+                                print("_______________________________")
+                                print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                      dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                      dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], "|",
+                                      dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
+                                      dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'],
+                                      dealer_cards[4]['Suit'])
+                                print("Dealer's sum: ", count_dealer)
+                                print("_______________________________")
+                                print("SPLIT!")
+                                break
+                            elif count < 21:
+                                print("_______________________________")
+                                print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                      dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                      dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                      dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
+                                      dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'],
+                                      dealer_cards[4]['Suit'])
+                                print("Dealer's sum: ", count_dealer)
+                                print("_______________________________")
+                                print("YOU LOST!")
+                                break
+
+                        else:
+                            if count < count_dealer:
+                                print("_______________________________")
+                                print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                      dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                      dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                      dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
+                                      dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'],
+                                      dealer_cards[4]['Suit'])
+                                print("Dealer's sum: ", count_dealer)
+                                print("_______________________________")
+                                print("YOU LOST!")
+                                break
+                            elif count > count_dealer:
+                                print("_______________________________")
+                                print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                      dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                      dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                      dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
+                                      dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'],
+                                      dealer_cards[4]['Suit'])
+                                print("Dealer's sum: ", count_dealer)
+                                print("_______________________________")
+                                print("YOU WON!")
+                                break
+                        break
+                    if count_dealer > 21:
+                        print("_______________________________")
+                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                              dealer_cards[2]['Rank'], dealer_cards[2]['Suit'],
+                              dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
+                        print("Dealer's sum: ", count_dealer)
+                        print("_______________________________")
+                        print("YOU WON!")
+                        break
+                    elif count_dealer == 21:
+                        if count == 21:
+                            print("_______________________________")
+                            print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                  dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                  dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                  dealer_cards[2]['Suit'], dealer_cards[3]['Rank'],
+                                  dealer_cards[3]['Suit'])
+                            print("Dealer's sum: ", count_dealer)
+                            print("_______________________________")
+                            print("SPLIT!")
+                            break
+                        elif count < 21:
+                            print("_______________________________")
+                            print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                  dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                  dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                  dealer_cards[2]['Suit'], dealer_cards[3]['Rank'],
+                                  dealer_cards[3]['Suit'])
+                            print("Dealer's sum: ", count_dealer)
+                            print("_______________________________")
+                            print("YOU LOST!")
+                            break
+
+                    else:
+                        if count < count_dealer:
+                            print("_______________________________")
+                            print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                  dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                  dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                  dealer_cards[2]['Suit'], dealer_cards[3]['Rank'],
+                                  dealer_cards[3]['Suit'])
+                            print("Dealer's sum: ", count_dealer)
+                            print("_______________________________")
+                            print("YOU LOST!")
+                            break
+                        elif count > count_dealer:
+                            print("_______________________________")
+                            print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                  dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                  dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                  dealer_cards[2]['Suit'], dealer_cards[3]['Rank'],
+                                  dealer_cards[3]['Suit'])
+                            print("Dealer's sum: ", count_dealer)
+                            print("_______________________________")
+                            print("YOU WON!")
+                            break
+                    break
+                if count_dealer > 21:
+                    print("_______________________________")
+                    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                          dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                          dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                    print("Dealer's sum: ", count_dealer)
+                    print("_______________________________")
+                    print("YOU WON!")
+                    break
+                elif count_dealer == 21:
+                    if count == 21:
+                        print("_______________________________")
+                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                              dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                        print("Dealer's sum: ", count_dealer)
+                        print("_______________________________")
+                        print("SPLIT!")
+                        break
+                    elif count < 21:
+                        print("_______________________________")
+                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                              dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                        print("Dealer's sum: ", count_dealer)
+                        print("_______________________________")
+                        print("YOU LOST!")
+                        break
+
+                else:
+                    if count < count_dealer:
+                        print("_______________________________")
+                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                              dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                        print("Dealer's sum: ", count_dealer)
+                        print("_______________________________")
+                        print("YOU LOST!")
+                        break
+                    elif count > count_dealer:
+                        print("_______________________________")
+                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                              dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                        print("Dealer's sum: ", count_dealer)
+                        print("_______________________________")
+                        print("YOU WON!")
+                        break
+                break
+            else:
+                if count_dealer > 21:
+                    print("_______________________________")
+                    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                          dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                          dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                    print("Dealer's sum: ", count_dealer)
+                    print("_______________________________")
+                    print("YOU WON!")
+                    break
+                elif count_dealer == 21:
+                    if count == 21:
+                        print("_______________________________")
+                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                              dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                        print("Dealer's sum: ", count_dealer)
+                        print("_______________________________")
+                        print("SPLIT!")
+                        break
+                    elif count < 21:
+                        print("_______________________________")
+                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
+                        print("Dealer's sum: ", count_dealer)
+                        print("_______________________________")
+                        print("YOU LOST!")
+                        break
+
+                else:
+                    if count < count_dealer:
+                        print("_______________________________")
+                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
+                        print("Dealer's sum: ", count_dealer)
+                        print("_______________________________")
+                        print("YOU LOST!")
+                        break
+                    elif count > count_dealer:
+                        print("_______________________________")
+                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
+                        print("Dealer's sum: ", count_dealer)
+                        print("_______________________________")
+                        print("YOU WON!")
+                        break
+                break
+
     else:
         print("You need to pick 1 - yes or 2 - no")
         break
