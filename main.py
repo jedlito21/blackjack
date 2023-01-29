@@ -69,10 +69,8 @@ menu_text = input("1 - Play\n2 - Ladder\n3 - Rules\n4 - About\n5 - End game\n")
 
 menuloop = True
 gameloop = False
-ladderloop = False
-rulesloop = False
-aboutloop = False
 
+back = input("1 - Go back to menu")
 
 while menuloop == True:
     print(menu)
@@ -81,28 +79,21 @@ while menuloop == True:
         gameloop = True
         menuloop = False
     elif menu_text == "2":
-        ladderloop = True
-        menuloop = False
+        pass
     elif menu_text == "3":
-        rulesloop = True
-        menuloop = False
+        print("•At start you get 2 cards\n•Your goal is to get sum of 21 or less\n•If you have more than 21 you loose\n•If you have 21 or less and the dealer has less than you, you win\n•If dealer has more than you but it's 21 or less, you loose\n\n")
     elif menu_text == "4":
-        aboutloop = True
-        menuloop = False
+        pass
     elif menu_text == "5":
         quit()
     else:
-        print("You chose wrong number!")
+        print("_____________________________________\nYou chose wrong number!\n_____________________________________\n")
         menuloop = False
 
 
 # žebříček
 
 
-# pravidla
-while rulesloop == True:
-    rulesloop = False
-    print("•At start you get 2 cards\n•Your goal is to get sum of 21 or less\n•If you have more than 21 you loose\n•If you have 21 or less and the dealer has less than you, you win\n•If dealer has more than you but it's 21 or less, you loose\n\n")
 
 # about
 while aboutloop == True:
