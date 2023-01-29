@@ -1057,6 +1057,7 @@ while gameloop == True:
         print("Your sum: ", count, "\n", "________________________________")
         if count > 21:
             double_loose(chips)
+            break
         elif count <= 21:
             if count_dealer <= 16:
                 deal_card_dealer(pack)
