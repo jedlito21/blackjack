@@ -6,9 +6,8 @@ colors = ["♥", "♦", "♠", "♣"]
 pack = [{"Rank": rank, "Suit": color} for rank in ranks for color in colors]
 random.shuffle(pack)
 
-card_count = 0
-card_count_dealer = 0
-# nastavení limitu a součtu a žetonu
+
+# nastavení limitu, součtu a žetonu
 count = 0
 count_dealer = 0
 limit = 21
@@ -35,45 +34,26 @@ def deal_card_dealer(pack):
     card = pack.pop()
     dealer_cards.append(card)
 
+# výhry a prohry
 def loose(chips):
     chips = chips - int(bet)
-    count = 0
-    card_count = 0
-    count_dealer = 0
-    card_count_dealer = 0
     print(chips)
     print("YOU LOST!")
 def win(chips):
     chips = chips + int(bet) + int(bet)
-    count = 0
-    card_count = 0
-    count_dealer = 0
-    card_count_dealer = 0
     print("Your chips: ", chips)
     print("YOU WON!")
 
 def double(chips):
     chips = chips + int(bet) + int(bet)
-    count = 0
-    card_count = 0
-    count_dealer = 0
-    card_count_dealer = 0
     print("Your chips: ", chips)
     print("YOU WON!")
 def double_loose(chips):
     chips = chips - int(bet) - int(bet)
-    count = 0
-    card_count = 0
-    count_dealer = 0
-    card_count_dealer = 0
     print("Your chips: ", chips)
     print("YOU LOST")
 def blackjack(chips):
     chips = chips + int(bet) + int(bet) / 2
-    count = 0
-    card_count = 0
-    count_dealer = 0
-    card_count_dealer = 0
     print("Your chips: ", chips)
     print("BLACKJACK!")
 
@@ -133,93 +113,113 @@ nickname = ""
 while gameloop == True:
     nickname = input("Nickname: ")
     # první tah
-    if card_count == 0:
-        deal_card_dealer(pack)
-        deal_card_player(pack)
-        count_dealer = count_dealer + value_of_card(dealer_cards[0]['Rank'])
-        card_count = card_count + 1
-        card_count_dealer = card_count_dealer + 1
-        count = count + value_of_card(player_cards[0]['Rank'])
-    if card_count == 1:
-        deal_card_dealer(pack)
-        deal_card_player(pack)
-        count_dealer = count_dealer + value_of_card(dealer_cards[1]['Rank'])
-        card_count = card_count + 1
-        card_count_dealer = card_count_dealer + 1
-        print("__________________________________", "\n", "Your cards: ", player_cards[0]['Rank'], player_cards[0]['Suit'], "|", player_cards[1]['Rank'], player_cards[1]['Suit'])
-        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "| Unknown")
-        count = count + value_of_card(player_cards[1]['Rank'])
-        print("Your sum: ", count, "\n", "________________________________")
-        print("Your chips: ", chips)
-        bet = input("Your bet: ")
-        if count == 21:
+
+    deal_card_dealer(pack)
+    deal_card_player(pack)
+    count_dealer = count_dealer + value_of_card(dealer_cards[0]['Rank'])
+    count = count + value_of_card(player_cards[0]['Rank'])
+
+    deal_card_dealer(pack)
+    deal_card_player(pack)
+    count_dealer = count_dealer + value_of_card(dealer_cards[1]['Rank'])
+    print("__________________________________", "\n", "Your cards: ", player_cards[0]['Rank'], player_cards[0]['Suit'], "|", player_cards[1]['Rank'], player_cards[1]['Suit'])
+    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "| Unknown")
+    count = count + value_of_card(player_cards[1]['Rank'])
+    print("Your sum: ", count, "\n", "________________________________")
+    print("Your chips: ", chips)
+    bet = input("Your bet: ")
+    if count == 21:
+        if count_dealer <= 16:
+            deal_card_dealer(pack)
+            count_dealer = count_dealer + value_of_card(dealer_cards[2]['Rank'])
             if count_dealer <= 16:
                 deal_card_dealer(pack)
-                card_count_dealer = card_count_dealer + 1
-                count_dealer = count_dealer + value_of_card(dealer_cards[2]['Rank'])
+                count_dealer = count_dealer + value_of_card(dealer_cards[3]['Rank'])
                 if count_dealer <= 16:
                     deal_card_dealer(pack)
-                    card_count_dealer = card_count_dealer + 1
-                    count_dealer = count_dealer + value_of_card(dealer_cards[3]['Rank'])
-                    if count_dealer <= 16:
-                        deal_card_dealer(pack)
-                        card_count_dealer = card_count_dealer + 1
-                        count_dealer = count_dealer + value_of_card(dealer_cards[4]['Rank'])
-                        if count_dealer > 21:
+                    count_dealer = count_dealer + value_of_card(dealer_cards[4]['Rank'])
+                    if count_dealer > 21:
+                        print("_______________________________")
+                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                              dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                              dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'], dealer_cards[3]['Suit'], "|",
+                              dealer_cards[4]['Rank'], dealer_cards[4]['Suit'])
+                        print("Dealer's sum: ", count_dealer)
+                        print("_______________________________")
+                        blackjack(chips)
+                    elif count_dealer == 21:
+                        if count == 21:
                             print("_______________________________")
                             print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
                                   dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                  dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'], dealer_cards[3]['Suit'], "|",
-                                  dealer_cards[4]['Rank'], dealer_cards[4]['Suit'])
+                                  "|", dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
+                                  dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'], dealer_cards[4]['Suit'])
+                            print("Dealer's sum: ", count_dealer)
+                            print("_______________________________")
+                            print("SPLIT!")
+                        elif count < 21:
+                            print("_______________________________")
+                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                                  dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                  dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'], dealer_cards[3]['Suit'],
+                                  "|", dealer_cards[4]['Rank'], dealer_cards[4]['Suit'])
+                            print("Dealer's sum: ", count_dealer)
+                            print("_______________________________")
+                            loose(chips)
+                    else:
+                        if count < count_dealer:
+                            print("_______________________________")
+                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                                  dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                  dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'], dealer_cards[3]['Suit'],
+                                  "|", dealer_cards[4]['Rank'], dealer_cards[4]['Suit'])
+                            print("Dealer's sum: ", count_dealer)
+                            print("_______________________________")
+                            loose(chips)
+                        elif count > count_dealer:
+                            print("_______________________________")
+                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                                  dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                  dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'], dealer_cards[3]['Suit'],
+                                  "|", dealer_cards[4]['Rank'], dealer_cards[4]['Suit'])
                             print("Dealer's sum: ", count_dealer)
                             print("_______________________________")
                             blackjack(chips)
-                            break
-                        elif count_dealer == 21:
-                            if count == 21:
-                                print("_______________________________")
-                                print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                                      dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                      "|", dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
-                                      dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'], dealer_cards[4]['Suit'])
-                                print("Dealer's sum: ", count_dealer)
-                                print("_______________________________")
-                                print("SPLIT!")
-                                break
-                            elif count < 21:
-                                print("_______________________________")
-                                print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                                      dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                      dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'], dealer_cards[3]['Suit'],
-                                      "|", dealer_cards[4]['Rank'], dealer_cards[4]['Suit'])
-                                print("Dealer's sum: ", count_dealer)
-                                print("_______________________________")
-                                loose(chips)
-                                break
-
-                        else:
-                            if count < count_dealer:
-                                print("_______________________________")
-                                print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                                      dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                      dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'], dealer_cards[3]['Suit'],
-                                      "|", dealer_cards[4]['Rank'], dealer_cards[4]['Suit'])
-                                print("Dealer's sum: ", count_dealer)
-                                print("_______________________________")
-                                loose(chips)
-                                break
-                            elif count > count_dealer:
-                                print("_______________________________")
-                                print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                                      dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                      dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'], dealer_cards[3]['Suit'],
-                                      "|", dealer_cards[4]['Rank'], dealer_cards[4]['Suit'])
-                                print("Dealer's sum: ", count_dealer)
-                                print("_______________________________")
-                                blackjack(chips)
-                                break
-                        break
-                    if count_dealer > 21:
+                if count_dealer > 21:
+                    print("_______________________________")
+                    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                          dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                          dealer_cards[2]['Suit'], dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
+                    print("Dealer's sum: ", count_dealer)
+                    print("_______________________________")
+                    blackjack(chips)
+                elif count_dealer == 21:
+                    if count == 21:
+                        print("_______________________________")
+                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                              dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                              dealer_cards[2]['Suit'], dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
+                        print("Dealer's sum: ", count_dealer)
+                        print("_______________________________")
+                        print("SPLIT!")
+                    elif count < 21:
+                        print("_______________________________")
+                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                              dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                              dealer_cards[2]['Suit'], dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
+                        print("Dealer's sum: ", count_dealer)
+                        print("_______________________________")
+                        loose(chips)
+                else:
+                    if count < count_dealer:
+                        print("_______________________________")
+                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                              dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                              dealer_cards[2]['Suit'], dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
+                        print("Dealer's sum: ", count_dealer)
+                        print("_______________________________")
+                        loose(chips)
+                    elif count > count_dealer:
                         print("_______________________________")
                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
                               dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
@@ -227,98 +227,41 @@ while gameloop == True:
                         print("Dealer's sum: ", count_dealer)
                         print("_______________________________")
                         blackjack(chips)
-                        break
-                    elif count_dealer == 21:
-                        if count == 21:
-                            print("_______________________________")
-                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                                  dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                  dealer_cards[2]['Suit'], dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
-                            print("Dealer's sum: ", count_dealer)
-                            print("_______________________________")
-                            print("SPLIT!")
-                            break
-                        elif count < 21:
-                            print("_______________________________")
-                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                                  dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                  dealer_cards[2]['Suit'], dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
-                            print("Dealer's sum: ", count_dealer)
-                            print("_______________________________")
-                            loose(chips)
-                            break
-
-                    else:
-                        if count < count_dealer:
-                            print("_______________________________")
-                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                                  dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                  dealer_cards[2]['Suit'], dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
-                            print("Dealer's sum: ", count_dealer)
-                            print("_______________________________")
-                            loose(chips)
-                            break
-                        elif count > count_dealer:
-                            print("_______________________________")
-                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                                  dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                  dealer_cards[2]['Suit'], dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
-                            print("Dealer's sum: ", count_dealer)
-                            print("_______________________________")
-                            blackjack(chips)
-                            break
-                    break
-                if count_dealer > 21:
+            if count_dealer > 21:
+                print("_______________________________")
+                print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                      dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                      dealer_cards[2]['Suit'])
+                print("Dealer's sum: ", count_dealer)
+                print("_______________________________")
+                blackjack(chips)
+            elif count_dealer == 21:
+                if count == 21:
                     print("_______________________________")
                     print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
                           dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
                           dealer_cards[2]['Suit'])
                     print("Dealer's sum: ", count_dealer)
                     print("_______________________________")
-                    blackjack(chips)
-                    break
-                elif count_dealer == 21:
-                    if count == 21:
-                        print("_______________________________")
-                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                              dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                              dealer_cards[2]['Suit'])
-                        print("Dealer's sum: ", count_dealer)
-                        print("_______________________________")
-                        print("SPLIT!")
-                        break
-                    elif count < 21:
-                        print("_______________________________")
-                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                              dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                              dealer_cards[2]['Suit'])
-                        print("Dealer's sum: ", count_dealer)
-                        print("_______________________________")
-                        loose(chips)
-                        break
-
-                else:
-                    if count < count_dealer:
-                        print("_______________________________")
-                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                              dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                              dealer_cards[2]['Suit'])
-                        print("Dealer's sum: ", count_dealer)
-                        print("_______________________________")
-                        loose(chips)
-                        break
-                    elif count > count_dealer:
-                        print("_______________________________")
-                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                              dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                              dealer_cards[2]['Suit'])
-                        print("Dealer's sum: ", count_dealer)
-                        print("_______________________________")
-                        blackjack(chips)
-                        break
-                break
+                    print("SPLIT!")
+                elif count < 21:
+                    print("_______________________________")
+                    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                          dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                          dealer_cards[2]['Suit'])
+                    print("Dealer's sum: ", count_dealer)
+                    print("_______________________________")
+                    loose(chips)
             else:
-                if count_dealer > 21:
+                if count < count_dealer:
+                    print("_______________________________")
+                    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                          dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                          dealer_cards[2]['Suit'])
+                    print("Dealer's sum: ", count_dealer)
+                    print("_______________________________")
+                    loose(chips)
+                elif count > count_dealer:
                     print("_______________________________")
                     print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
                           dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
@@ -326,296 +269,283 @@ while gameloop == True:
                     print("Dealer's sum: ", count_dealer)
                     print("_______________________________")
                     blackjack(chips)
-                    break
-                elif count_dealer == 21:
-                    if count == 21:
-                        print("_______________________________")
-                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                              dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                              dealer_cards[2]['Suit'])
-                        print("Dealer's sum: ", count_dealer)
-                        print("_______________________________")
-                        print("SPLIT!")
-                        break
-                    elif count < 21:
-                        print("_______________________________")
-                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                              dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
-                        print("Dealer's sum: ", count_dealer)
-                        print("_______________________________")
-                        loose(chips)
-                        break
-
-                else:
-                    if count < count_dealer:
-                        print("_______________________________")
-                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                              dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
-                        print("Dealer's sum: ", count_dealer)
-                        print("_______________________________")
-                        loose(chips)
-                        break
-                    elif count > count_dealer:
-                        print("_______________________________")
-                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                              dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
-                        print("Dealer's sum: ", count_dealer)
-                        print("_______________________________")
-                        blackjack(chips)
-                        break
-                break
+        else:
+            if count_dealer > 21:
+                print("_______________________________")
+                print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                      dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                      dealer_cards[2]['Suit'])
+                print("Dealer's sum: ", count_dealer)
+                print("_______________________________")
+                blackjack(chips)
+            elif count_dealer == 21:
+                if count == 21:
+                    print("_______________________________")
+                    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                          dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                          dealer_cards[2]['Suit'])
+                    print("Dealer's sum: ", count_dealer)
+                    print("_______________________________")
+                    print("SPLIT!")
+                elif count < 21:
+                    print("_______________________________")
+                    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                          dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
+                    print("Dealer's sum: ", count_dealer)
+                    print("_______________________________")
+                    loose(chips)
+            else:
+                if count < count_dealer:
+                    print("_______________________________")
+                    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                          dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
+                    print("Dealer's sum: ", count_dealer)
+                    print("_______________________________")
+                    loose(chips)
+                elif count > count_dealer:
+                    print("_______________________________")
+                    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                          dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
+                    print("Dealer's sum: ", count_dealer)
+                    print("_______________________________")
+                    blackjack(chips)
     # druhý tah
 
     take_card = input("Do you want to take a card?  1 - yes / 2 - no / 3 - double down")
 
     if take_card == "1":
-        if card_count == 2:
-            deal_card_player(pack)
-            card_count = card_count + 1
-            print("__________________________________", "\n", "Your cards: ", player_cards[0]['Rank'], player_cards[0]['Suit'], "|", player_cards[1]['Rank'], player_cards[1]['Suit'], "|", player_cards[2]['Rank'], player_cards[2]['Suit'])
-            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "| Unknown")
-            count = count + value_of_card(player_cards[2]['Rank'])
-            print("Your sum: ", count, "\n", "________________________________")
-            if count > 21:
-                loose(chips)
-
-            elif count < 21:
-                take_card = input("Do you want to take a card?  1 - yes / 2 - no")
-
-                # třetí tah
-                if take_card == "1":
-                    if card_count == 3:
+        deal_card_player(pack)
+        print("__________________________________", "\n", "Your cards: ", player_cards[0]['Rank'], player_cards[0]['Suit'], "|", player_cards[1]['Rank'], player_cards[1]['Suit'], "|", player_cards[2]['Rank'], player_cards[2]['Suit'])
+        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "| Unknown")
+        count = count + value_of_card(player_cards[2]['Rank'])
+        print("Your sum: ", count, "\n", "________________________________")
+        if count > 21:
+            loose(chips)
+        elif count < 21:
+            take_card = input("Do you want to take a card?  1 - yes / 2 - no")
+            # třetí tah
+            if take_card == "1":
+                deal_card_player(pack)
+                print("__________________________________", "\n", "Your cards: ", player_cards[0]['Rank'], player_cards[0]['Suit'], "|", player_cards[1]['Rank'], player_cards[1]['Suit'], "|", player_cards[2]['Rank'], player_cards[2]['Suit'], "|", player_cards[3]['Rank'], player_cards[3]['Suit'])
+                print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "| Unknown")
+                count = count + value_of_card(player_cards[3]['Rank'])
+                print("Your sum: ", count, "\n", "________________________________")
+                if count > 21:
+                    loose(chips)
+                elif count < 21:
+                    take_card = input("Do you want to take a card?  1 - yes / 2 - no")
+                    # čtvrtý tah
+                    if take_card == "1":
                         deal_card_player(pack)
-                        card_count = card_count + 1
-                        print("__________________________________", "\n", "Your cards: ", player_cards[0]['Rank'], player_cards[0]['Suit'], "|", player_cards[1]['Rank'], player_cards[1]['Suit'], "|", player_cards[2]['Rank'], player_cards[2]['Suit'], "|", player_cards[3]['Rank'], player_cards[3]['Suit'])
+                        print("__________________________________", "\n", "Your cards: ", player_cards[0]['Rank'], player_cards[0]['Suit'], "|", player_cards[1]['Rank'], player_cards[1]['Suit'], "|", player_cards[2]['Rank'], player_cards[2]['Suit'], "|", player_cards[3]['Rank'], player_cards[3]['Suit'], "|", player_cards[4]['Rank'], player_cards[4]['Suit'])
                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "| Unknown")
-                        count = count + value_of_card(player_cards[3]['Rank'])
+                        count = count + value_of_card(player_cards[4]['Rank'])
                         print("Your sum: ", count, "\n", "________________________________")
                         if count > 21:
                             loose(chips)
-                        elif count < 21:
-                            take_card = input("Do you want to take a card?  1 - yes / 2 - no")
-
-                            # čtvrtý tah
-                            if take_card == "1":
-                                if card_count == 4:
-                                    deal_card_player(pack)
-                                    card_count = card_count + 1
-                                    print("__________________________________", "\n", "Your cards: ", player_cards[0]['Rank'], player_cards[0]['Suit'], "|", player_cards[1]['Rank'], player_cards[1]['Suit'], "|", player_cards[2]['Rank'], player_cards[2]['Suit'], "|", player_cards[3]['Rank'], player_cards[3]['Suit'], "|", player_cards[4]['Rank'], player_cards[4]['Suit'])
-                                    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "| Unknown")
-                                    count = count + value_of_card(player_cards[4]['Rank'])
-                                    print("Your sum: ", count, "\n", "________________________________")
-                                    if count > 21:
-                                        loose(chips)
-                                    elif count <= 21:
-                                        print("SPLIT!")
-                            elif take_card == "2":
+                        elif count <= 21:
+                            print("SPLIT!")
+                    elif take_card == "2":
+                        if count_dealer <= 16:
+                            deal_card_dealer(pack)
+                            count_dealer = count_dealer + value_of_card(dealer_cards[2]['Rank'])
+                            if count_dealer <= 16:
+                                deal_card_dealer(pack)
+                                count_dealer = count_dealer + value_of_card(dealer_cards[3]['Rank'])
                                 if count_dealer <= 16:
                                     deal_card_dealer(pack)
-                                    card_count_dealer = card_count_dealer + 1
-                                    count_dealer = count_dealer + value_of_card(dealer_cards[2]['Rank'])
-                                    if count_dealer <= 16:
-                                        deal_card_dealer(pack)
-                                        card_count_dealer = card_count_dealer + 1
-                                        count_dealer = count_dealer + value_of_card(dealer_cards[3]['Rank'])
-                                        if count_dealer <= 16:
-                                            deal_card_dealer(pack)
-                                            card_count_dealer = card_count_dealer + 1
-                                            count_dealer = count_dealer + value_of_card(dealer_cards[4]['Rank'])
-                                            if count_dealer > 21:
-                                                print("_______________________________")
-                                                print("Dealer cards: ", dealer_cards[0]['Rank'],
-                                                      dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
-                                                      dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                                      dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
-                                                      dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'],
-                                                      dealer_cards[4]['Suit'])
-                                                print("Dealer's sum: ", count_dealer)
-                                                print("_______________________________")
-                                                win(chips)
-                                            elif count_dealer == 21:
-                                                if count == 21:
-                                                    print("_______________________________")
-                                                    print("Dealer cards: ", dealer_cards[0]['Rank'],
-                                                          dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
-                                                          dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], "|",
-                                                          dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
-                                                          dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'],
-                                                          dealer_cards[4]['Suit'])
-                                                    print("Dealer's sum: ", count_dealer)
-                                                    print("_______________________________")
-                                                    print("SPLIT!")
-                                                elif count < 21:
-                                                    print("_______________________________")
-                                                    print("Dealer cards: ", dealer_cards[0]['Rank'],
-                                                          dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
-                                                          dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                                          dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
-                                                          dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'],
-                                                          dealer_cards[4]['Suit'])
-                                                    print("Dealer's sum: ", count_dealer)
-                                                    print("_______________________________")
-                                                    loose(chips)
-                                            else:
-                                                if count < count_dealer:
-                                                    print("_______________________________")
-                                                    print("Dealer cards: ", dealer_cards[0]['Rank'],
-                                                          dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
-                                                          dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                                          dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
-                                                          dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'],
-                                                          dealer_cards[4]['Suit'])
-                                                    print("Dealer's sum: ", count_dealer)
-                                                    print("_______________________________")
-                                                    loose(chips)
-                                                elif count > count_dealer:
-                                                    print("_______________________________")
-                                                    print("Dealer cards: ", dealer_cards[0]['Rank'],
-                                                          dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
-                                                          dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                                          dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
-                                                          dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'],
-                                                          dealer_cards[4]['Suit'])
-                                                    print("Dealer's sum: ", count_dealer)
-                                                    print("_______________________________")
-                                                    win(chips)
-                                        if count_dealer > 21:
-                                            print("_______________________________")
-                                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
-                                                  "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
-                                                  dealer_cards[2]['Rank'], dealer_cards[2]['Suit'],
-                                                  dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
-                                            print("Dealer's sum: ", count_dealer)
-                                            print("_______________________________")
-                                            win(chips)
-                                        elif count_dealer == 21:
-                                            if count == 21:
-                                                print("_______________________________")
-                                                print("Dealer cards: ", dealer_cards[0]['Rank'],
-                                                      dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
-                                                      dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                                      dealer_cards[2]['Suit'], dealer_cards[3]['Rank'],
-                                                      dealer_cards[3]['Suit'])
-                                                print("Dealer's sum: ", count_dealer)
-                                                print("_______________________________")
-                                                print("SPLIT!")
-                                            elif count < 21:
-                                                print("_______________________________")
-                                                print("Dealer cards: ", dealer_cards[0]['Rank'],
-                                                      dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
-                                                      dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                                      dealer_cards[2]['Suit'], dealer_cards[3]['Rank'],
-                                                      dealer_cards[3]['Suit'])
-                                                print("Dealer's sum: ", count_dealer)
-                                                print("_______________________________")
-                                                loose(chips)
-                                        else:
-                                            if count < count_dealer:
-                                                print("_______________________________")
-                                                print("Dealer cards: ", dealer_cards[0]['Rank'],
-                                                      dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
-                                                      dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                                      dealer_cards[2]['Suit'], dealer_cards[3]['Rank'],
-                                                      dealer_cards[3]['Suit'])
-                                                print("Dealer's sum: ", count_dealer)
-                                                print("_______________________________")
-                                                loose(chips)
-                                            elif count > count_dealer:
-                                                print("_______________________________")
-                                                print("Dealer cards: ", dealer_cards[0]['Rank'],
-                                                      dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
-                                                      dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
-                                                      dealer_cards[2]['Suit'], dealer_cards[3]['Rank'],
-                                                      dealer_cards[3]['Suit'])
-                                                print("Dealer's sum: ", count_dealer)
-                                                print("_______________________________")
-                                                win(chips)
-
+                                    count_dealer = count_dealer + value_of_card(dealer_cards[4]['Rank'])
                                     if count_dealer > 21:
                                         print("_______________________________")
-                                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                                              dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
-                                              dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                                        print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                              dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                              dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                              dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
+                                              dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'],
+                                              dealer_cards[4]['Suit'])
                                         print("Dealer's sum: ", count_dealer)
                                         print("_______________________________")
                                         win(chips)
                                     elif count_dealer == 21:
                                         if count == 21:
                                             print("_______________________________")
-                                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
-                                                  "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
-                                                  dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                                            print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                                  dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                                  dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], "|",
+                                                  dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
+                                                  dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'],
+                                                  dealer_cards[4]['Suit'])
                                             print("Dealer's sum: ", count_dealer)
                                             print("_______________________________")
                                             print("SPLIT!")
                                         elif count < 21:
                                             print("_______________________________")
-                                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
-                                                  "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
-                                                  dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                                            print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                                  dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                                  dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                                  dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
+                                                  dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'],
+                                                  dealer_cards[4]['Suit'])
                                             print("Dealer's sum: ", count_dealer)
                                             print("_______________________________")
                                             loose(chips)
                                     else:
                                         if count < count_dealer:
                                             print("_______________________________")
-                                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
-                                                  "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
-                                                  dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                                            print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                                  dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                                  dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                                  dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
+                                                  dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'],
+                                                  dealer_cards[4]['Suit'])
                                             print("Dealer's sum: ", count_dealer)
                                             print("_______________________________")
                                             loose(chips)
                                         elif count > count_dealer:
                                             print("_______________________________")
-                                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
-                                                  "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
-                                                  dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                                            print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                                  dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                                  dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                                  dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'],
+                                                  dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'],
+                                                  dealer_cards[4]['Suit'])
                                             print("Dealer's sum: ", count_dealer)
                                             print("_______________________________")
                                             win(chips)
+                                if count_dealer > 21:
+                                    print("_______________________________")
+                                    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                                          "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                                          dealer_cards[2]['Rank'], dealer_cards[2]['Suit'],
+                                          dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
+                                    print("Dealer's sum: ", count_dealer)
+                                    print("_______________________________")
+                                    win(chips)
+                                elif count_dealer == 21:
+                                    if count == 21:
+                                        print("_______________________________")
+                                        print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                              dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                              dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                              dealer_cards[2]['Suit'], dealer_cards[3]['Rank'],
+                                              dealer_cards[3]['Suit'])
+                                        print("Dealer's sum: ", count_dealer)
+                                        print("_______________________________")
+                                        print("SPLIT!")
+                                    elif count < 21:
+                                        print("_______________________________")
+                                        print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                              dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                              dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                              dealer_cards[2]['Suit'], dealer_cards[3]['Rank'],
+                                              dealer_cards[3]['Suit'])
+                                        print("Dealer's sum: ", count_dealer)
+                                        print("_______________________________")
+                                        loose(chips)
+                                else:
+                                    if count < count_dealer:
+                                        print("_______________________________")
+                                        print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                              dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                              dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                              dealer_cards[2]['Suit'], dealer_cards[3]['Rank'],
+                                              dealer_cards[3]['Suit'])
+                                        print("Dealer's sum: ", count_dealer)
+                                        print("_______________________________")
+                                        loose(chips)
+                                    elif count > count_dealer:
+                                        print("_______________________________")
+                                        print("Dealer cards: ", dealer_cards[0]['Rank'],
+                                              dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'],
+                                              dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'],
+                                              dealer_cards[2]['Suit'], dealer_cards[3]['Rank'],
+                                              dealer_cards[3]['Suit'])
+                                        print("Dealer's sum: ", count_dealer)
+                                        print("_______________________________")
+                                        win(chips)
+                                if count_dealer > 21:
+                                    print("_______________________________")
+                                    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                                          dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                                          dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                                    print("Dealer's sum: ", count_dealer)
+                                    print("_______________________________")
+                                    win(chips)
+                                elif count_dealer == 21:
+                                    if count == 21:
+                                        print("_______________________________")
+                                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                                              dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                                        print("Dealer's sum: ", count_dealer)
+                                        print("_______________________________")
+                                        print("SPLIT!")
+                                    elif count < 21:
+                                        print("_______________________________")
+                                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                                              dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                                        print("Dealer's sum: ", count_dealer)
+                                        print("_______________________________")
+                                        loose(chips)
+                                else:
+                                    if count < count_dealer:
+                                        print("_______________________________")
+                                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                                              dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                                        print("Dealer's sum: ", count_dealer)
+                                        print("_______________________________")
+                                        loose(chips)
+                                    elif count > count_dealer:
+                                        print("_______________________________")
+                                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                                              dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                                        print("Dealer's sum: ", count_dealer)
+                                        print("_______________________________")
+                                        win(chips)
+                            else:
+                                if count_dealer > 21:
+                                    print("_______________________________")
+                                    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
+                                          dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                                          dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                                    print("Dealer's sum: ", count_dealer)
+                                    print("_______________________________")
+                                    win(chips)
+                                elif count_dealer == 21:
+                                    if count == 21:
+                                        print("_______________________________")
+                                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
+                                              dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                                        print("Dealer's sum: ", count_dealer)
+                                        print("_______________________________")
+                                        print("SPLIT!")
+                                    elif count < 21:
+                                        print("_______________________________")
+                                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
+                                        print("Dealer's sum: ", count_dealer)
+                                        print("_______________________________")
+                                        loose(chips)
 
                                 else:
-                                    if count_dealer > 21:
+                                    if count < count_dealer:
                                         print("_______________________________")
-                                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
-                                              dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
-                                              dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
+                                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
+                                        print("Dealer's sum: ", count_dealer)
+                                        print("_______________________________")
+                                        loose(chips)
+                                    elif count > count_dealer:
+                                        print("_______________________________")
+                                        print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+                                              "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
                                         print("Dealer's sum: ", count_dealer)
                                         print("_______________________________")
                                         win(chips)
-                                    elif count_dealer == 21:
-                                        if count == 21:
-                                            print("_______________________________")
-                                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
-                                                  "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|",
-                                                  dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
-                                            print("Dealer's sum: ", count_dealer)
-                                            print("_______________________________")
-                                            print("SPLIT!")
-                                        elif count < 21:
-                                            print("_______________________________")
-                                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
-                                                  "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
-                                            print("Dealer's sum: ", count_dealer)
-                                            print("_______________________________")
-                                            loose(chips)
-
-                                    else:
-                                        if count < count_dealer:
-                                            print("_______________________________")
-                                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
-                                                  "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
-                                            print("Dealer's sum: ", count_dealer)
-                                            print("_______________________________")
-                                            loose(chips)
-                                        elif count > count_dealer:
-                                            print("_______________________________")
-                                            print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
-                                                  "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
-                                            print("Dealer's sum: ", count_dealer)
-                                            print("_______________________________")
-                                            win(chips)
-
                         else:
                             if count_dealer > 21:
                                 print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
@@ -647,15 +577,12 @@ while gameloop == True:
                 elif take_card == "2":
                     if count_dealer <= 16:
                         deal_card_dealer(pack)
-                        card_count_dealer = card_count_dealer + 1
                         count_dealer = count_dealer + value_of_card(dealer_cards[2]['Rank'])
                         if count_dealer <= 16:
                             deal_card_dealer(pack)
-                            card_count_dealer = card_count_dealer + 1
                             count_dealer = count_dealer + value_of_card(dealer_cards[3]['Rank'])
                             if count_dealer <= 16:
                                 deal_card_dealer(pack)
-                                card_count_dealer = card_count_dealer + 1
                                 count_dealer = count_dealer + value_of_card(dealer_cards[4]['Rank'])
                                 if count_dealer > 21:
                                     print("_______________________________")
@@ -843,15 +770,12 @@ while gameloop == True:
     elif take_card == "2":
         if count_dealer <= 16:
             deal_card_dealer(pack)
-            card_count_dealer = card_count_dealer + 1
             count_dealer = count_dealer + value_of_card(dealer_cards[2]['Rank'])
             if count_dealer <= 16:
                 deal_card_dealer(pack)
-                card_count_dealer = card_count_dealer + 1
                 count_dealer = count_dealer + value_of_card(dealer_cards[3]['Rank'])
                 if count_dealer <= 16:
                     deal_card_dealer(pack)
-                    card_count_dealer = card_count_dealer + 1
                     count_dealer = count_dealer + value_of_card(dealer_cards[4]['Rank'])
                     if count_dealer > 21:
                         print("_______________________________")
@@ -984,7 +908,6 @@ while gameloop == True:
                     win(chips)
     elif take_card == "3":
         deal_card_player(pack)
-        card_count = card_count + 1
         print("__________________________________", "\n", "Your cards: ", player_cards[0]['Rank'], player_cards[0]['Suit'], "|", player_cards[1]['Rank'], player_cards[1]['Suit'], "|", player_cards[2]['Rank'], player_cards[2]['Suit'])
         count = count + value_of_card(player_cards[2]['Rank'])
         print("Your sum: ", count, "\n", "________________________________")
@@ -993,15 +916,12 @@ while gameloop == True:
         elif count <= 21:
             if count_dealer <= 16:
                 deal_card_dealer(pack)
-                card_count_dealer = card_count_dealer + 1
                 count_dealer = count_dealer + value_of_card(dealer_cards[2]['Rank'])
                 if count_dealer <= 16:
                     deal_card_dealer(pack)
-                    card_count_dealer = card_count_dealer + 1
                     count_dealer = count_dealer + value_of_card(dealer_cards[3]['Rank'])
                     if count_dealer <= 16:
                         deal_card_dealer(pack)
-                        card_count_dealer = card_count_dealer + 1
                         count_dealer = count_dealer + value_of_card(dealer_cards[4]['Rank'])
                         if count_dealer > 21:
                             print("_______________________________")
