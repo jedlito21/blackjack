@@ -57,6 +57,12 @@ def blackjack(chips):
     print("Your chips: ", chips)
     print("BLACKJACK!")
 
+def dealer_two_cards():
+    print("_______________________________")
+    print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
+          "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
+    print("Dealer's sum: ", count_dealer)
+    print("_______________________________")
 # ukládání karet
 
 player_cards = []
@@ -135,6 +141,8 @@ while gameloop == True:
                             blackjack(chips)
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                         elif count_dealer == 21:
                             if count == 21:
                                 print("_______________________________")
@@ -145,6 +153,8 @@ while gameloop == True:
                                 print(chips)
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                             elif count < 21:
                                 print("_______________________________")
                                 print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'], dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'], dealer_cards[4]['Suit'])
@@ -153,6 +163,8 @@ while gameloop == True:
                                 loose(chips)
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                         else:
                             if count < count_dealer:
                                 print("_______________________________")
@@ -162,6 +174,8 @@ while gameloop == True:
                                 loose(chips)
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                             elif count > count_dealer:
                                 print("_______________________________")
                                 print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'], dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'], dealer_cards[4]['Suit'])
@@ -170,6 +184,8 @@ while gameloop == True:
                                 blackjack(chips)
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                     if count_dealer > 21:
                         print("_______________________________")
                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], dealer_cards[2]['Suit'], dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
@@ -178,6 +194,8 @@ while gameloop == True:
                         blackjack(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                     elif count_dealer == 21:
                         if count == 21:
                             print("_______________________________")
@@ -187,6 +205,8 @@ while gameloop == True:
                             print("SPLIT!")
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                         elif count < 21:
                             print("_______________________________")
                             print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], dealer_cards[2]['Suit'], dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
@@ -195,6 +215,8 @@ while gameloop == True:
                             loose(chips)
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                     else:
                         if count < count_dealer:
                             print("_______________________________")
@@ -204,6 +226,8 @@ while gameloop == True:
                             loose(chips)
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                         elif count > count_dealer:
                             print("_______________________________")
                             print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], dealer_cards[2]['Suit'], dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
@@ -212,6 +236,8 @@ while gameloop == True:
                             blackjack(chips)
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                 if count_dealer > 21:
                     print("_______________________________")
                     print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
@@ -220,6 +246,8 @@ while gameloop == True:
                     blackjack(chips)
                     count = 0
                     count_dealer = 0
+                    player_cards = []
+                    dealer_cards = []
                 elif count_dealer == 21:
                     if count == 21:
                         print("_______________________________")
@@ -229,6 +257,8 @@ while gameloop == True:
                         print("SPLIT!")
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                     elif count < 21:
                         print("_______________________________")
                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
@@ -237,6 +267,8 @@ while gameloop == True:
                         loose(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                 else:
                     if count < count_dealer:
                         print("_______________________________")
@@ -246,6 +278,8 @@ while gameloop == True:
                         loose(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                     elif count > count_dealer:
                         print("_______________________________")
                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
@@ -254,6 +288,8 @@ while gameloop == True:
                         blackjack(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
             else:
                 if count_dealer > 21:
                     print("_______________________________")
@@ -263,6 +299,8 @@ while gameloop == True:
                     blackjack(chips)
                     count = 0
                     count_dealer = 0
+                    player_cards = []
+                    dealer_cards = []
                 elif count_dealer == 21:
                     if count == 21:
                         print("_______________________________")
@@ -272,6 +310,8 @@ while gameloop == True:
                         print("SPLIT!")
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                     elif count < 21:
                         print("_______________________________")
                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
@@ -280,6 +320,8 @@ while gameloop == True:
                         loose(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                 else:
                     if count < count_dealer:
                         print("_______________________________")
@@ -289,6 +331,8 @@ while gameloop == True:
                         loose(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                     elif count > count_dealer:
                         print("_______________________________")
                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
@@ -297,6 +341,8 @@ while gameloop == True:
                         blackjack(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
         # druhý tah
 
         take_card = input("Do you want to take a card?  1 - yes / 2 - no / 3 - double down")
@@ -311,6 +357,8 @@ while gameloop == True:
                 loose(chips)
                 count = 0
                 count_dealer = 0
+                player_cards = []
+                dealer_cards = []
             elif count < 21:
                 take_card = input("Do you want to take a card?  1 - yes / 2 - no")
                 # třetí tah
@@ -324,6 +372,8 @@ while gameloop == True:
                         loose(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                     elif count < 21:
                         take_card = input("Do you want to take a card?  1 - yes / 2 - no")
                         # čtvrtý tah
@@ -337,10 +387,14 @@ while gameloop == True:
                                 loose(chips)
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                             elif count <= 21:
                                 print("SPLIT!")
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                         elif take_card == "2":
                             if count_dealer <= 16:
                                 deal_card_dealer(pack)
@@ -364,6 +418,8 @@ while gameloop == True:
                                             win(chips)
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                         elif count_dealer == 21:
                                             if count == 21:
                                                 print("_______________________________")
@@ -378,6 +434,8 @@ while gameloop == True:
                                                 print("SPLIT!")
                                                 count = 0
                                                 count_dealer = 0
+                                                player_cards = []
+                                                dealer_cards = []
                                             elif count < 21:
                                                 print("_______________________________")
                                                 print("Dealer cards: ", dealer_cards[0]['Rank'],
@@ -391,6 +449,8 @@ while gameloop == True:
                                                 loose(chips)
                                                 count = 0
                                                 count_dealer = 0
+                                                player_cards = []
+                                                dealer_cards = []
                                         else:
                                             if count < count_dealer:
                                                 print("_______________________________")
@@ -405,6 +465,8 @@ while gameloop == True:
                                                 loose(chips)
                                                 count = 0
                                                 count_dealer = 0
+                                                player_cards = []
+                                                dealer_cards = []
                                             elif count > count_dealer:
                                                 print("_______________________________")
                                                 print("Dealer cards: ", dealer_cards[0]['Rank'],
@@ -418,6 +480,8 @@ while gameloop == True:
                                                 win(chips)
                                                 count = 0
                                                 count_dealer = 0
+                                                player_cards = []
+                                                dealer_cards = []
                                     if count_dealer > 21:
                                         print("_______________________________")
                                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
@@ -429,6 +493,8 @@ while gameloop == True:
                                         win(chips)
                                         count = 0
                                         count_dealer = 0
+                                        player_cards = []
+                                        dealer_cards = []
                                     elif count_dealer == 21:
                                         if count == 21:
                                             print("_______________________________")
@@ -442,6 +508,8 @@ while gameloop == True:
                                             print("SPLIT!")
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                         elif count < 21:
                                             print("_______________________________")
                                             print("Dealer cards: ", dealer_cards[0]['Rank'],
@@ -454,6 +522,8 @@ while gameloop == True:
                                             loose(chips)
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                     else:
                                         if count < count_dealer:
                                             print("_______________________________")
@@ -467,6 +537,8 @@ while gameloop == True:
                                             loose(chips)
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                         elif count > count_dealer:
                                             print("_______________________________")
                                             print("Dealer cards: ", dealer_cards[0]['Rank'],
@@ -479,6 +551,8 @@ while gameloop == True:
                                             win(chips)
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                     if count_dealer > 21:
                                         print("_______________________________")
                                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
@@ -489,6 +563,8 @@ while gameloop == True:
                                         win(chips)
                                         count = 0
                                         count_dealer = 0
+                                        player_cards = []
+                                        dealer_cards = []
                                     elif count_dealer == 21:
                                         if count == 21:
                                             print("_______________________________")
@@ -500,6 +576,8 @@ while gameloop == True:
                                             print("SPLIT!")
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                         elif count < 21:
                                             print("_______________________________")
                                             print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
@@ -510,6 +588,8 @@ while gameloop == True:
                                             loose(chips)
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                     else:
                                         if count < count_dealer:
                                             print("_______________________________")
@@ -521,6 +601,8 @@ while gameloop == True:
                                             loose(chips)
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                         elif count > count_dealer:
                                             print("_______________________________")
                                             print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
@@ -531,6 +613,8 @@ while gameloop == True:
                                             win(chips)
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                 else:
                                     if count_dealer > 21:
                                         print("_______________________________")
@@ -542,6 +626,8 @@ while gameloop == True:
                                         win(chips)
                                         count = 0
                                         count_dealer = 0
+                                        player_cards = []
+                                        dealer_cards = []
                                     elif count_dealer == 21:
                                         if count == 21:
                                             print("_______________________________")
@@ -553,6 +639,8 @@ while gameloop == True:
                                             print("SPLIT!")
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                         elif count < 21:
                                             print("_______________________________")
                                             print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
@@ -562,6 +650,8 @@ while gameloop == True:
                                             loose(chips)
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                     else:
                                         if count < count_dealer:
                                             print("_______________________________")
@@ -572,6 +662,8 @@ while gameloop == True:
                                             loose(chips)
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                         elif count > count_dealer:
                                             print("_______________________________")
                                             print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
@@ -581,6 +673,8 @@ while gameloop == True:
                                             win(chips)
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                             else:
                                 if count_dealer > 21:
                                     print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
@@ -589,6 +683,8 @@ while gameloop == True:
                                     win(chips)
                                     count = 0
                                     count_dealer = 0
+                                    player_cards = []
+                                    dealer_cards = []
                                 elif count_dealer == 21:
                                     if count == 21:
                                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
@@ -597,6 +693,8 @@ while gameloop == True:
                                         print("SPLIT!")
                                         count = 0
                                         count_dealer = 0
+                                        player_cards = []
+                                        dealer_cards = []
                                     elif count < 21:
                                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
                                         print("Dealer's sum: ", count_dealer)
@@ -604,6 +702,8 @@ while gameloop == True:
                                         loose(chips)
                                         count = 0
                                         count_dealer = 0
+                                        player_cards = []
+                                        dealer_cards = []
                                 else:
                                     if count < count_dealer:
                                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
@@ -612,6 +712,8 @@ while gameloop == True:
                                         loose(chips)
                                         count = 0
                                         count_dealer = 0
+                                        player_cards = []
+                                        dealer_cards = []
                                     elif count > count_dealer:
                                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
                                         print("Dealer's sum: ", count_dealer)
@@ -619,6 +721,8 @@ while gameloop == True:
                                         win(chips)
                                         count = 0
                                         count_dealer = 0
+                                        player_cards = []
+                                        dealer_cards = []
                     elif take_card == "2":
                         if count_dealer <= 16:
                             deal_card_dealer(pack)
@@ -641,6 +745,8 @@ while gameloop == True:
                                         win(chips)
                                         count = 0
                                         count_dealer = 0
+                                        player_cards = []
+                                        dealer_cards = []
                                     elif count_dealer == 21:
                                         if count == 21:
                                             print("_______________________________")
@@ -654,6 +760,8 @@ while gameloop == True:
                                             print("SPLIT!")
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                         elif count < 21:
                                             print("_______________________________")
                                             print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
@@ -666,6 +774,8 @@ while gameloop == True:
                                             loose(chips)
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                     else:
                                         if count < count_dealer:
                                             print("_______________________________")
@@ -679,6 +789,8 @@ while gameloop == True:
                                             loose(chips)
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                         elif count > count_dealer:
                                             print("_______________________________")
                                             print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
@@ -691,6 +803,8 @@ while gameloop == True:
                                             win(chips)
                                             count = 0
                                             count_dealer = 0
+                                            player_cards = []
+                                            dealer_cards = []
                                 if count_dealer > 21:
                                     print("_______________________________")
                                     print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
@@ -701,6 +815,8 @@ while gameloop == True:
                                     win(chips)
                                     count = 0
                                     count_dealer = 0
+                                    player_cards = []
+                                    dealer_cards = []
                                 elif count_dealer == 21:
                                     if count == 21:
                                         print("_______________________________")
@@ -713,6 +829,8 @@ while gameloop == True:
                                         print("SPLIT!")
                                         count = 0
                                         count_dealer = 0
+                                        player_cards = []
+                                        dealer_cards = []
                                     elif count < 21:
                                         print("_______________________________")
                                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
@@ -724,6 +842,8 @@ while gameloop == True:
                                         loose(chips)
                                         count = 0
                                         count_dealer = 0
+                                        player_cards = []
+                                        dealer_cards = []
                                 else:
                                     if count < count_dealer:
                                         print("_______________________________")
@@ -736,6 +856,8 @@ while gameloop == True:
                                         loose(chips)
                                         count = 0
                                         count_dealer = 0
+                                        player_cards = []
+                                        dealer_cards = []
                                     elif count > count_dealer:
                                         print("_______________________________")
                                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
@@ -747,6 +869,8 @@ while gameloop == True:
                                         win(chips)
                                         count = 0
                                         count_dealer = 0
+                                        player_cards = []
+                                        dealer_cards = []
                             if count_dealer > 21:
                                 print("_______________________________")
                                 print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
@@ -757,6 +881,8 @@ while gameloop == True:
                                 win(chips)
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                             elif count_dealer == 21:
                                 if count == 21:
                                     print("_______________________________")
@@ -768,6 +894,8 @@ while gameloop == True:
                                     print("SPLIT!")
                                     count = 0
                                     count_dealer = 0
+                                    player_cards = []
+                                    dealer_cards = []
                                 elif count < 21:
                                     print("_______________________________")
                                     print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
@@ -778,6 +906,8 @@ while gameloop == True:
                                     loose(chips)
                                     count = 0
                                     count_dealer = 0
+                                    player_cards = []
+                                    dealer_cards = []
                             else:
                                 if count < count_dealer:
                                     print("_______________________________")
@@ -789,6 +919,8 @@ while gameloop == True:
                                     loose(chips)
                                     count = 0
                                     count_dealer = 0
+                                    player_cards = []
+                                    dealer_cards = []
                                 elif count > count_dealer:
                                     print("_______________________________")
                                     print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
@@ -799,6 +931,8 @@ while gameloop == True:
                                     win(chips)
                                     count = 0
                                     count_dealer = 0
+                                    player_cards = []
+                                    dealer_cards = []
                         else:
                             if count_dealer > 21:
                                 print("_______________________________")
@@ -810,6 +944,8 @@ while gameloop == True:
                                 win(chips)
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                             elif count_dealer == 21:
                                 if count == 21:
                                     print("_______________________________")
@@ -821,6 +957,8 @@ while gameloop == True:
                                     print("SPLIT!")
                                     count = 0
                                     count_dealer = 0
+                                    player_cards = []
+                                    dealer_cards = []
                                 elif count < 21:
                                     print("_______________________________")
                                     print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
@@ -830,6 +968,8 @@ while gameloop == True:
                                     loose(chips)
                                     count = 0
                                     count_dealer = 0
+                                    player_cards = []
+                                    dealer_cards = []
                             else:
                                 if count < count_dealer:
                                     print("_______________________________")
@@ -840,6 +980,8 @@ while gameloop == True:
                                     loose(chips)
                                     count = 0
                                     count_dealer = 0
+                                    player_cards = []
+                                    dealer_cards = []
                                 elif count > count_dealer:
                                     print("_______________________________")
                                     print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
@@ -849,10 +991,14 @@ while gameloop == True:
                                     win(chips)
                                     count = 0
                                     count_dealer = 0
+                                    player_cards = []
+                                    dealer_cards = []
                 else:
                     win(chips)
                     count = 0
                     count_dealer = 0
+                    player_cards = []
+                    dealer_cards = []
         elif take_card == "2":
             if count_dealer <= 16:
                 deal_card_dealer(pack)
@@ -871,6 +1017,8 @@ while gameloop == True:
                             win(chips)
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                         elif count_dealer == 21:
                             if count == 21:
                                 print("_______________________________")
@@ -880,6 +1028,8 @@ while gameloop == True:
                                 print("SPLIT!")
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                             elif count < 21:
                                 print("_______________________________")
                                 print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'], dealer_cards[3]['Suit'], "|", dealer_cards[4]['Rank'], dealer_cards[4]['Suit'])
@@ -888,6 +1038,8 @@ while gameloop == True:
                                 loose(chips)
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                         else:
                             if count < count_dealer:
                                 print("_______________________________")
@@ -897,6 +1049,8 @@ while gameloop == True:
                                 loose(chips)
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                             elif count > count_dealer:
                                 print("_______________________________")
                                 print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'], dealer_cards[3]['Suit'],  "|", dealer_cards[4]['Rank'], dealer_cards[4]['Suit'])
@@ -905,6 +1059,8 @@ while gameloop == True:
                                 win(chips)
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                     if count_dealer > 21:
                         print("_______________________________")
                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], dealer_cards[2]['Suit'], "|", dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
@@ -913,6 +1069,8 @@ while gameloop == True:
                         win(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                     elif count_dealer == 21:
                         if count == 21:
                             print("_______________________________")
@@ -930,6 +1088,8 @@ while gameloop == True:
                             loose(chips)
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                     else:
                         if count < count_dealer:
                             print("_______________________________")
@@ -939,6 +1099,8 @@ while gameloop == True:
                             loose(chips)
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                         elif count > count_dealer:
                             print("_______________________________")
                             print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], dealer_cards[2]['Suit'], "|",dealer_cards[3]['Rank'], dealer_cards[3]['Suit'])
@@ -947,6 +1109,8 @@ while gameloop == True:
                             win(chips)
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                 if count_dealer > 21:
                     print("_______________________________")
                     print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
@@ -955,6 +1119,8 @@ while gameloop == True:
                     win(chips)
                     count = 0
                     count_dealer = 0
+                    player_cards = []
+                    dealer_cards = []
                 elif count_dealer == 21:
                     if count == 21:
                         print("_______________________________")
@@ -964,6 +1130,8 @@ while gameloop == True:
                         print("SPLIT!")
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                     elif count < 21:
                         print("_______________________________")
                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'], "|", dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
@@ -972,6 +1140,8 @@ while gameloop == True:
                         loose(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                 else:
                     if count < count_dealer:
                         print("_______________________________")
@@ -981,6 +1151,8 @@ while gameloop == True:
                         loose(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                     elif count > count_dealer:
                         print("_______________________________")
                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'] , "|", dealer_cards[2]['Rank'], dealer_cards[2]['Suit'])
@@ -989,6 +1161,8 @@ while gameloop == True:
                         win(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
             else:
                 if count_dealer > 21:
                     print("_______________________________")
@@ -998,6 +1172,8 @@ while gameloop == True:
                     win(chips)
                     count = 0
                     count_dealer = 0
+                    player_cards = []
+                    dealer_cards = []
                 elif count_dealer == 21:
                     if count == 21:
                         print("_______________________________")
@@ -1007,6 +1183,8 @@ while gameloop == True:
                         print("SPLIT!")
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                     elif count < 21:
                         print("_______________________________")
                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
@@ -1015,6 +1193,8 @@ while gameloop == True:
                         loose(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                 else:
                     if count < count_dealer:
                         print("_______________________________")
@@ -1024,6 +1204,8 @@ while gameloop == True:
                         loose(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                     elif count > count_dealer:
                         print("_______________________________")
                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|", dealer_cards[1]['Rank'], dealer_cards[1]['Suit'])
@@ -1032,6 +1214,8 @@ while gameloop == True:
                         win(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
         elif take_card == "3":
             deal_card_player(pack)
             print("__________________________________", "\n", "Your cards: ", player_cards[0]['Rank'], player_cards[0]['Suit'], "|", player_cards[1]['Rank'], player_cards[1]['Suit'], "|", player_cards[2]['Rank'], player_cards[2]['Suit'])
@@ -1041,6 +1225,8 @@ while gameloop == True:
                 double_loose(chips)
                 count = 0
                 count_dealer = 0
+                player_cards = []
+                dealer_cards = []
             elif count <= 21:
                 if count_dealer <= 16:
                     deal_card_dealer(pack)
@@ -1064,6 +1250,8 @@ while gameloop == True:
                                 double(chips)
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                             elif count_dealer == 21:
                                 if count == 21:
                                     print("_______________________________")
@@ -1078,6 +1266,8 @@ while gameloop == True:
                                     print("SPLIT!")
                                     count = 0
                                     count_dealer = 0
+                                    player_cards = []
+                                    dealer_cards = []
                                 elif count < 21:
                                     print("_______________________________")
                                     print("Dealer cards: ", dealer_cards[0]['Rank'],
@@ -1091,6 +1281,8 @@ while gameloop == True:
                                     double_loose(chips)
                                     count = 0
                                     count_dealer = 0
+                                    player_cards = []
+                                    dealer_cards = []
                             else:
                                 if count < count_dealer:
                                     print("_______________________________")
@@ -1105,6 +1297,8 @@ while gameloop == True:
                                     double_loose(chips)
                                     count = 0
                                     count_dealer = 0
+                                    player_cards = []
+                                    dealer_cards = []
                                 elif count > count_dealer:
                                     print("_______________________________")
                                     print("Dealer cards: ", dealer_cards[0]['Rank'],
@@ -1118,6 +1312,8 @@ while gameloop == True:
                                     double(chips)
                                     count = 0
                                     count_dealer = 0
+                                    player_cards = []
+                                    dealer_cards = []
                         if count_dealer > 21:
                             print("_______________________________")
                             print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
@@ -1129,6 +1325,8 @@ while gameloop == True:
                             double(chips)
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                         elif count_dealer == 21:
                             if count == 21:
                                 print("_______________________________")
@@ -1142,6 +1340,8 @@ while gameloop == True:
                                 print("SPLIT!")
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                             elif count < 21:
                                 print("_______________________________")
                                 print("Dealer cards: ", dealer_cards[0]['Rank'],
@@ -1154,6 +1354,8 @@ while gameloop == True:
                                 double_loose(chips)
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                         else:
                             if count < count_dealer:
                                 print("_______________________________")
@@ -1167,6 +1369,8 @@ while gameloop == True:
                                 double_loose(chips)
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                             elif count > count_dealer:
                                 print("_______________________________")
                                 print("Dealer cards: ", dealer_cards[0]['Rank'],
@@ -1179,6 +1383,8 @@ while gameloop == True:
                                 double(chips)
                                 count = 0
                                 count_dealer = 0
+                                player_cards = []
+                                dealer_cards = []
                     if count_dealer > 21:
                         print("_______________________________")
                         print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'], "|",
@@ -1189,6 +1395,8 @@ while gameloop == True:
                         double(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                     elif count_dealer == 21:
                         if count == 21:
                             print("_______________________________")
@@ -1200,6 +1408,8 @@ while gameloop == True:
                             print("SPLIT!")
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                         elif count < 21:
                             print("_______________________________")
                             print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
@@ -1210,6 +1420,8 @@ while gameloop == True:
                             double_loose(chips)
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                     else:
                         if count < count_dealer:
                             print("_______________________________")
@@ -1221,6 +1433,8 @@ while gameloop == True:
                             double_loose(chips)
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                         elif count > count_dealer:
                             print("_______________________________")
                             print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
@@ -1231,6 +1445,8 @@ while gameloop == True:
                             double(chips)
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                 else:
                     if count_dealer > 21:
                         print("_______________________________")
@@ -1242,6 +1458,8 @@ while gameloop == True:
                         double(chips)
                         count = 0
                         count_dealer = 0
+                        player_cards = []
+                        dealer_cards = []
                     elif count_dealer == 21:
                         if count == 21:
                             print("_______________________________")
@@ -1253,6 +1471,8 @@ while gameloop == True:
                             print("SPLIT!")
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                         elif count < 21:
                             print("_______________________________")
                             print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
@@ -1262,6 +1482,8 @@ while gameloop == True:
                             double_loose(chips)
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                     else:
                         if count < count_dealer:
                             print("_______________________________")
@@ -1272,6 +1494,8 @@ while gameloop == True:
                             double_loose(chips)
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
                         elif count > count_dealer:
                             print("_______________________________")
                             print("Dealer cards: ", dealer_cards[0]['Rank'], dealer_cards[0]['Suit'],
@@ -1281,6 +1505,8 @@ while gameloop == True:
                             double(chips)
                             count = 0
                             count_dealer = 0
+                            player_cards = []
+                            dealer_cards = []
 
         else:
             print("You need to pick 1 - yes / 2 - no / 3 - double down")
