@@ -111,7 +111,6 @@ while aboutloop == True:
 # hra
 nickname = ""
 while gameloop == True:
-    nickname = input("Nickname: ")
     # první tah
 
     deal_card_dealer(pack)
