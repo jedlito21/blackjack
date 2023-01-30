@@ -1,4 +1,5 @@
 import random
+import json
 
 # vytvořený balík karet
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
@@ -12,6 +13,7 @@ count = 0
 count_dealer = 0
 limit = 21
 chips = 1000
+nickname = ""
 
 # převod slov na hodnoty
 def value_of_card(card):
@@ -24,6 +26,7 @@ def value_of_card(card):
             return 1
         else:
             return 11
+
 
 # dealování karet
 def deal_card_player(pack):
@@ -68,6 +71,7 @@ def dealer_two_cards():
 player_cards = []
 dealer_cards = []
 
+
 # menu
 menu = print("██████  ██       █████   ██████ ██   ██      ██  █████   ██████ ██   ██\n██   ██ ██      ██   ██ ██      ██  ██       ██ ██   ██ ██      ██  ██ \n██████  ██      ███████ ██      █████        ██ ███████ ██      █████  \n██   ██ ██      ██   ██ ██      ██  ██  ██   ██ ██   ██ ██      ██  ██ \n██████  ███████ ██   ██  ██████ ██   ██  █████  ██   ██  ██████ ██   ██ \n")
 menu_text = input("1 - Play\n2 - Ladder\n3 - Rules\n4 - About\n5 - End game\n")
@@ -101,13 +105,25 @@ while menuloop == True:
         menu_text = input("1 - Play\n2 - Ladder\n3 - Rules\n4 - About\n5 - End game\n")
         menuloop = True
 
+# ukládání do žebříčku
 
+def save(ladder, filename = "ladder.json"):
+    ladder = {}
 
+    ladder['Name'] = {'Name': nickname, 'chips': chips}
+    with open(filename, 'r+') as file:
+        file_data = json.load(file)
+        # Join new_data with file_data inside emp_details
+        file_data["Name"].append(ladder)
+        # Sets file's current position at offset.
+        file.seek(0)
+        # convert back to json.
+        json.dump(file_data, file, indent=4)
 # hra
-nickname = ""
 while gameloop == True:
     if chips > 0:
         # první tah
+        nickname = input("Enter your nickname: ")
         bet = input("Your bet: ")
         deal_card_dealer(pack)
         deal_card_player(pack)
@@ -1005,7 +1021,7 @@ while gameloop == True:
                 count_dealer = count_dealer + value_of_card(dealer_cards[2]['Rank'])
                 if count_dealer <= 16:
                     deal_card_dealer(pack)
-                    count_dealer = count_dealer + value_of_card(dealer_cards[3]['Rank'])
+                    count_dealer = count_dealer + value_of_card(dealer_cards[2]['Rank'])
                     if count_dealer <= 16:
                         deal_card_dealer(pack)
                         count_dealer = count_dealer + value_of_card(dealer_cards[4]['Rank'])
